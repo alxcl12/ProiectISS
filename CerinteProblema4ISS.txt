@@ -1,0 +1,29 @@
+Se cere crearea unei aplicatii ce permite monitorizarea angajatilor intr-o firma.
+In urma autentificarii, se vor deschide ferestre diferite pentru sef sau angajat.
+Cerinte: 
+
+1. Autentificare 
+	-> atat pentru sef cat si pentru angajati
+	-> se vor introduce username si parola iar daca sunt corecte se va intra in cont 
+
+2. Afisare angajati 
+	-> seful vede toti angajatii logati plus ora logarii angajatului 
+
+3. Trimite sarcina 
+	-> seful trimite o sarcina unui angajat curent logat, acesta este notificat
+	-> se va preciza descrierea sarcinii, timpul limita, alte constrangeri
+
+4. Creeaza angajat
+	-> seful poate crea un nou cont, reprezentand un proaspat angajat 
+
+5. Introducere timp check in 
+	-> angajatul isi face check in la momentul logarii, semnalizand inceputul zilei de lucru 
+	-> poate fi automatizat
+
+6. Finalizare sarcina 
+	-> angajatul marcheaza una din sarcinile asignate ca fiind finalizata
+	-> angajatul poate completa timpul necesar finalizarii sarcinii
+	-> angajatul poate da un rating sarcinii	
+
+7. Delogare 
+	-> atat pentru sef cat si pentru angajati
