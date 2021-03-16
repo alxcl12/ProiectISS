@@ -2,28 +2,169 @@ Se cere crearea unei aplicatii ce permite monitorizarea angajatilor intr-o firma
 In urma autentificarii, se vor deschide ferestre diferite pentru sef sau angajat.
 Cerinte: 
 
-1. Autentificare 
-	-> atat pentru sef cat si pentru angajati
-	-> se vor introduce username si parola iar daca sunt corecte se va intra in cont 
+1. Login 
+	Name: Login
 
-2. Afisare angajati 
-	-> seful vede toti angajatii logati plus ora logarii angajatului 
+	Actors: Manager and employee
 
-3. Trimite sarcina 
-	-> seful trimite o sarcina unui angajat curent logat, acesta este notificat
-	-> se va preciza descrierea sarcinii, timpul limita, alte constrangeri
+	Description: Actor uses credentials in order to obtain access to the application
 
-4. Creeaza angajat
-	-> seful poate crea un nou cont, reprezentand un proaspat angajat 
+	Trigger: Pressing login button
 
-5. Introducere timp check in 
-	-> angajatul isi face check in la momentul logarii, semnalizand inceputul zilei de lucru 
-	-> poate fi automatizat
+	Preconditions: Login window is open
 
-6. Finalizare sarcina 
-	-> angajatul marcheaza una din sarcinile asignate ca fiind finalizata
-	-> angajatul poate completa timpul necesar finalizarii sarcinii
-	-> angajatul poate da un rating sarcinii	
+	Postconditions: Actor is authenticated into the application or error appears
 
-7. Delogare 
-	-> atat pentru sef cat si pentru angajati
+	Normal flow: 1. Actor inputs username
+		     2. Actor inputs password
+		     3. Actor clicks "Login" button
+		     4. Application performs validation
+
+	Alternative flow: (when input data is incorrect)
+				5. Application marks data as invalid
+				6. Application displays error message
+				7. Go back to 1 in normal flow	
+
+
+2. Show logged in employees 
+	Name: Show logged in employees
+
+	Actor: Manager
+
+	Description: Manager can view all logged in employees at the moment and authentication time for each employee
+
+	Trigger: Pressing "Show employees" button
+
+	Preconditions: Manager is logged in
+
+	Postconditions: -
+
+	Normal flow: 1. Manager clicks "Show employees" button from his window
+		     2. List with all logged in employees and time of login is displayed
+
+	Alternate flow: -
+	
+
+3. Send task to employee
+	Name: Send task to employee
+
+	Actor: Manager
+
+	Description: Manager sends a task to an employee providing description, deadline and other constraints
+
+	Trigger: Pressing "Send task" button
+
+	Preconditions: Manager is logged in
+
+	Postconditions: Task is assigned or error is raised
+
+	Normal flow: 1. Manager clicks "Send task" button from his window
+		     2. Manager inputs task description, deadline and other constraints
+		     3. Manager clicks "Send" button
+		     4. Application validates data
+		     5. Task is visible in manager's window
+
+	Alternate flow: (when task is already assigned)
+			5. Application marks data as invalid
+			6. Error message is shown
+			7. Go back to 1 in normal flow
+
+
+4. Create employee account
+	Name: Create employee account
+
+	Actor: Manager
+
+	Description: Manager creates a new account for a new employee
+
+	Trigger: Pressing "Add employee" button
+
+	Preconditions: Manager is logged in
+
+	Postconditions: New account is created or error is raised
+
+	Normal flow: 1. Manger clicks "Add employee" button from his window
+		     2. Manger inputs username for new employee
+		     3. Manger inputs password for new employee
+		     4. Manager clicks "Add" button
+
+	Alternate flow: (when username already exists)
+			3.1 Manager inputs existing username
+			4. Error message is shown
+			5. Go back to 1 in normal flow 
+
+
+5. Delete employee account
+	Name: Delete
+
+	Actor: Manager
+
+	Description: Manager deletes account for one employee
+
+	Trigger: Pressing "Remove employee" button
+
+	Preconditions: Manager is logged in
+
+	Postconditions: Account is deleted
+
+	Normal flow: 1. Manger clicks "Remove employee" button from his window
+		     2. Manager selects employee to be removed
+		     3. Manager clicks "Remove" button
+
+	Alternate flow: -
+
+
+6. Input check in time:
+	Name: Input check in time
+
+	Actor: Employee
+
+	Description: Employee selects time to check in at work
+
+	Trigger: Pressing "Check in" button
+
+	Preconditions: Employee is logged in
+
+	Postconditions: Employee is now active
+
+	Normal flow: 1. Employee clicks "Check in" button from his window
+
+	Alternate flow: -
+
+7. Finish task 
+	Name: Finish task
+
+	Actor: Employee
+
+	Description: Employee selects task to mark as finished
+
+	Trigger: Pressing "Mark as finished" button
+
+	Preconditions: Employee is logged in
+
+	Postconditions: Task is no longer displayed in task window
+
+	Normal flow: 1. Employee selects task from task window
+		     2. Employee adds rating for selected task
+		     3. Employee clicks "Finished" button
+
+	Alternate flow: -
+
+
+8. Logout
+	Name: Logout
+
+	Actors: Manager and employee
+
+	Description: Actor will be logged out of the application
+
+	Trigger: Pressing "Logout" button
+
+	Preconditions: Actor is logged in
+
+	Postconditions: Actor is no longer logged in
+
+	Normal flow: 1. Actor clicks "Logout" button
+		     2. Authentication window is now displayed
+
+	Alternate flow: -
