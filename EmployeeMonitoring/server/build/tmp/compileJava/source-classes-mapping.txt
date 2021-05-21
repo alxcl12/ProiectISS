@@ -1,0 +1,37 @@
+model/Employee.java
+ model.Employee
+org/hibernate/dialect/SQLiteDialect.java
+ org.hibernate.dialect.SQLiteDialect
+ org.hibernate.dialect.SQLiteDialect$1
+ org.hibernate.dialect.SQLiteDialect$2
+ org.hibernate.dialect.SQLiteDialect$3
+ org.hibernate.dialect.SQLiteDialect$4
+ org.hibernate.dialect.SQLiteDialect$SQLiteUniqueDelegate
+model/Manager.java
+ model.Manager
+repository/TaskRepository.java
+ repository.TaskRepository
+utils/Observer.java
+ utils.Observer
+networking/Request.java
+ networking.Request
+org/hibernate/dialect/identity/SQLiteDialectIdentityColumnSupport.java
+ org.hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport
+repository/ManagerRepository.java
+ repository.ManagerRepository
+utils/Observable.java
+ utils.Observable
+model/Task.java
+ model.Task
+networking/Response.java
+ networking.Response
+networking/Server.java
+ networking.Server
+networking/Worker.java
+ networking.Worker
+Main.java
+ Main
+service/Service.java
+ service.Service
+repository/EmployeeRepository.java
+ repository.EmployeeRepository

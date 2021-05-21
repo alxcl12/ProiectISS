@@ -1,0 +1,4 @@
+rootProject.name = 'EmployeeMonitoring'
+include 'server'
+include 'client'
+

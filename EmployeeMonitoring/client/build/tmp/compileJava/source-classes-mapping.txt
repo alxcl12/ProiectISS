@@ -1,0 +1,11 @@
+Main.java
+ Main
+gui/EmployeeController.java
+ gui.EmployeeController
+gui/ManagerController.java
+ gui.ManagerController
+gui/LoginController.java
+ gui.LoginController
+networking/Proxy.java
+ networking.Proxy
+ networking.Proxy$Reader
