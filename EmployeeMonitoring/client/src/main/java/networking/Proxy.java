@@ -93,10 +93,10 @@ public class Proxy {
         return (List<Employee>) ((Response) queue.take()).data;
     }
 
-    public Employee angajatPrezent(String employeeUsername, String oraAutentificare) throws IOException, InterruptedException {
+    public Employee angajatPrezent(String employeeUsername, String time) throws IOException, InterruptedException {
         List<Object> objects = new ArrayList<>();
-        objects.add(employeeUsername); objects.add(oraAutentificare);
-        Request request = new Request("checkInEmployee", objects);
+        objects.add(employeeUsername); objects.add(time);
+        Request request = new Request("checkIn", objects);
         outputStream.writeObject(request);
         outputStream.flush();
         return (Employee) ((Response) queue.take()).data;

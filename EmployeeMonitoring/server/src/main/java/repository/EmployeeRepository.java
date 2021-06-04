@@ -73,7 +73,7 @@ public class EmployeeRepository {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                Employee employee = findOne(updatedEmployee.getEmployeeUsername());
+                Employee employee = session.get(Employee.class, updatedEmployee.getEmployeeUsername());
                 employee.setName(updatedEmployee.getName());
                 employee.setPassword(updatedEmployee.getPassword());
                 transaction.commit();
@@ -91,7 +91,7 @@ public class EmployeeRepository {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                Employee employee = findOne(employeeUsername);
+                Employee employee = session.get(Employee.class, employeeUsername);
                 employee.setStatus(status);
                 employee.setTime(time);
                 transaction.commit();
@@ -109,7 +109,7 @@ public class EmployeeRepository {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-                Employee employee = findOne(employeeUsername);
+                Employee employee = session.get(Employee.class, employeeUsername);
                 session.delete(employee);
                 transaction.commit();
                 return employee;

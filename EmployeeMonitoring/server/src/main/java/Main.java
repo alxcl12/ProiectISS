@@ -36,11 +36,6 @@ public class Main {
         TaskRepository taskRepository = new TaskRepository(sessionFactory);
         Service service = new Service(employeeRepository, managerRepository, taskRepository);
 
-        /*
-            Manager: cmandu, airbus;
-            Employee: tginga, pass;
-         */
-
         Server server = new Server(55556, service);
         server.start();
     }

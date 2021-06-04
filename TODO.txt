@@ -1,3 +1,0 @@
-Adaugare entitate prezenta, timpul nu depinde de angajat.
-Separare angajat de prezenta
-+ diagrame

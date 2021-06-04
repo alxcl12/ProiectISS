@@ -17,4 +17,16 @@ public class Task implements Serializable {
     private String status;
     private Manager manager;
     private Employee employee;
+    private String employeeUsername;
+
+    public void setEmployee(Employee employee){
+        this.employee = employee;
+        this.employeeUsername = employee.getEmployeeUsername();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Task other = (Task) o;
+        return (this.employeeUsername.equals(other.employeeUsername) && this.description.equals(other.description));
+    }
 }

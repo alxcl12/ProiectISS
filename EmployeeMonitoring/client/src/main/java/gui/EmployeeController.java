@@ -4,18 +4,22 @@
  */
 package gui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalTimeStringConverter;
 import model.Employee;
 import model.Task;
 import networking.Proxy;
 
 import java.io.IOException;
 import java.time.LocalTime;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -24,7 +28,7 @@ public class EmployeeController {
     Stage primaryStage;
 
     @FXML
-    Spinner<Integer> checkInTime;
+    Spinner<LocalTime> checkInTime;
 
     @FXML
     Button checkInButton;
@@ -55,6 +59,7 @@ public class EmployeeController {
         statusTableColumn.setCellValueFactory(new PropertyValueFactory<Task, String>("status"));
 
         tasksTableView.setItems(modelTasks);
+        setSpinnerFactory();
     }
 
     public void set(Proxy proxy, Employee employee, Stage primaryStage) throws IOException, InterruptedException {
@@ -62,6 +67,37 @@ public class EmployeeController {
         this.employee = employee;
         this.primaryStage = primaryStage;
         tasksTableView.setItems(modelTasks);
+    }
+
+    private void setSpinnerFactory(){
+        SpinnerValueFactory<LocalTime> value = new SpinnerValueFactory<LocalTime>() {
+            {
+                setConverter(new LocalTimeStringConverter(FormatStyle.SHORT));
+            }
+            @Override
+            public void decrement(int steps) {
+                if(getValue()==null){
+                    setValue(LocalTime.now());
+                }
+                else {
+                    LocalTime time = getValue();
+                    setValue(time.minusMinutes(steps));
+                }
+            }
+
+            @Override
+            public void increment(int steps) {
+                if (this.getValue() == null)
+                    setValue(LocalTime.now());
+                else {
+                    LocalTime time =  getValue();
+                    setValue(time.plusMinutes(steps));
+                }
+            }
+        };
+
+        checkInTime.setValueFactory(value);
+        checkInTime.setEditable(true);
     }
 
     @FXML
@@ -86,7 +122,7 @@ public class EmployeeController {
         if (task != null) {
             proxy.finalizeTask(task);
             proxy.notifyManagerTaskCompleted(task);
-            modelTasks.setAll(StreamSupport.stream(proxy.findAllMyTasks(employee).spliterator(), false).collect(Collectors.toList()));
+            modelTasks.setAll(new ArrayList<>(proxy.findAllMyTasks(employee)));
         }
         else {
             Alert message = new Alert(Alert.AlertType.ERROR);
@@ -104,7 +140,10 @@ public class EmployeeController {
         proxy.removeObserver();
     }
 
-    public void update(List<Task> tasks) {
-        modelTasks.setAll(StreamSupport.stream(tasks.spliterator(), false).collect(Collectors.toList()));
+    public void update(List<Task> tasks) throws IOException, InterruptedException {
+        Platform.runLater(()->{
+            modelTasks.clear();
+            modelTasks.setAll(StreamSupport.stream(tasks.spliterator(), false).collect(Collectors.toList()));
+        });
     }
 }

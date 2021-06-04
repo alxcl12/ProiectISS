@@ -6,11 +6,7 @@
 <hibernate-mapping>
     <class name="model.Manager" table="Manager">
 
-        <id name="managerId" column="managerId" type="int">
-            <generator class="increment"/>
-        </id>
-
-        <property name="managerUsername" column="managerUsername" type="string"/>
+        <id name="managerUsername" column="managerUsername" type="string"/>
 
         <property name="password" column="password" type="string"/>
 

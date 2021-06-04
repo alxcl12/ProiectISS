@@ -1,5 +1,5 @@
-model/Employee.java
- model.Employee
+model/Manager.java
+ model.Manager
 org/hibernate/dialect/SQLiteDialect.java
  org.hibernate.dialect.SQLiteDialect
  org.hibernate.dialect.SQLiteDialect$1
@@ -7,31 +7,31 @@ org/hibernate/dialect/SQLiteDialect.java
  org.hibernate.dialect.SQLiteDialect$3
  org.hibernate.dialect.SQLiteDialect$4
  org.hibernate.dialect.SQLiteDialect$SQLiteUniqueDelegate
-model/Manager.java
- model.Manager
-repository/TaskRepository.java
- repository.TaskRepository
-utils/Observer.java
- utils.Observer
+repository/ManagerRepository.java
+ repository.ManagerRepository
+Main.java
+ Main
+networking/Response.java
+ networking.Response
 networking/Request.java
  networking.Request
 org/hibernate/dialect/identity/SQLiteDialectIdentityColumnSupport.java
  org.hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport
-repository/ManagerRepository.java
- repository.ManagerRepository
-utils/Observable.java
- utils.Observable
-model/Task.java
- model.Task
-networking/Response.java
- networking.Response
+model/Employee.java
+ model.Employee
 networking/Server.java
  networking.Server
 networking/Worker.java
  networking.Worker
-Main.java
- Main
+model/Task.java
+ model.Task
 service/Service.java
  service.Service
+utils/Observer.java
+ utils.Observer
+repository/TaskRepository.java
+ repository.TaskRepository
+utils/Observable.java
+ utils.Observable
 repository/EmployeeRepository.java
  repository.EmployeeRepository

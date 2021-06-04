@@ -2,6 +2,7 @@ Main.java
  Main
 gui/EmployeeController.java
  gui.EmployeeController
+ gui.EmployeeController$1
 gui/ManagerController.java
  gui.ManagerController
 gui/LoginController.java

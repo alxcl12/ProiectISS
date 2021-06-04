@@ -14,7 +14,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class Manager implements Serializable {
-    private int managerId;
     private String managerUsername;
     private String password;
     private String name;

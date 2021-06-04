@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Service {
-    public final EmployeeRepository employeeRepository;
-    private final ManagerRepository managerRepository;
-    public final TaskRepository taskRepository;
+    public EmployeeRepository employeeRepository;
+    private ManagerRepository managerRepository;
+    public TaskRepository taskRepository;
 
     public Service(EmployeeRepository employeeRepository, ManagerRepository managerRepository, TaskRepository taskRepository) {
         this.employeeRepository = employeeRepository;
@@ -46,12 +46,15 @@ public class Service {
     public List<Employee> findAllMyEmployees(Manager manager) {
         List<Employee> employees;
         employees = employeeRepository.findAll();
-        employees.removeIf(employee -> !employee.getManager().getManagerUsername().equals(manager.getManagerUsername()));
+        for (Employee employee : employees) {
+            if (!employee.getManager().getManagerUsername().equals(manager.getManagerUsername()))
+                employees.remove(employee);
+        }
         return employees;
     }
 
-    public Employee checkInEmployee(String employeeUsername, String time) {
-        return employeeRepository.updateStatus(employeeUsername, "logged_in", time);
+    public Employee checkInEmployee(String employeeUsername, String oraAutentificare) {
+        return employeeRepository.updateStatus(employeeUsername, "logged_in", oraAutentificare);
     }
 
     public List<Employee> findAllMyLoggedInEmployees(Manager manager) {

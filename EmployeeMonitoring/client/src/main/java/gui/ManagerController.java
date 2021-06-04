@@ -4,6 +4,7 @@
  */
 package gui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -130,11 +131,16 @@ public class ManagerController {
     }
 
     public void update(List<Employee> employees) {
-        modelLoggedInEmployees.setAll(StreamSupport.stream(employees.spliterator(), false).collect(Collectors.toList()));
+        Platform.runLater(()->{
+            modelLoggedInEmployees.setAll(StreamSupport.stream(employees.spliterator(), false).collect(Collectors.toList()));
+        });
     }
 
     public void updateTasks(List<Task> tasks) {
-        modelTasks.setAll(StreamSupport.stream(tasks.spliterator(), false).collect(Collectors.toList()));
+        Platform.runLater(()->{
+            modelTasks.clear();
+            modelTasks.setAll(StreamSupport.stream(tasks.spliterator(), false).collect(Collectors.toList()));
+        });
     }
 
     public void loadEmployeeDetails(Object object) {
@@ -180,7 +186,16 @@ public class ManagerController {
                 message.setContentText("The employee already exists");
                 message.showAndWait();
             }
-            modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+            Platform.runLater(()->{
+                modelEmployees.clear();
+                try {
+                    modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -209,8 +224,17 @@ public class ManagerController {
                 message.setContentText("The update has failed");
                 message.showAndWait();
             }
-            modelEmployees.clear();
-            modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+
+            Platform.runLater(()->{
+                modelEmployees.clear();
+                try {
+                    modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -237,7 +261,18 @@ public class ManagerController {
                 message.setContentText("The delete has failed");
                 message.showAndWait();
             }
-            modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+
+
+            Platform.runLater(()->{
+                modelEmployees.clear();
+                try {
+                    modelEmployees.setAll(StreamSupport.stream(proxy.findAllMyEmployees(manager).spliterator(), false).collect(Collectors.toList()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -256,7 +291,17 @@ public class ManagerController {
             task.setEmployee(employee);
             proxy.addTask(task);
             proxy.notifyEmployeeNewTask(task);
-            modelTasks.setAll(StreamSupport.stream(proxy.findAllMyTasks(manager).spliterator(), false).collect(Collectors.toList()));
+
+            Platform.runLater(()->{
+                try {
+                    modelTasks.setAll(StreamSupport.stream(proxy.findAllMyTasks(manager).spliterator(), false).collect(Collectors.toList()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
+
         }
         else {
             Alert message = new Alert(Alert.AlertType.ERROR);

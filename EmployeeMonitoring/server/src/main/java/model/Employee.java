@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 public class Employee implements Serializable {
-    private int employeeId;
     private String employeeUsername;
     private String password;
     private String name;
@@ -38,5 +37,9 @@ public class Employee implements Serializable {
         this.manager = manager;
     }
 
-
+    @Override
+    public boolean equals(Object o){
+        Employee other = (Employee) o;
+        return (this.name.equals(other.name));
+    }
 }

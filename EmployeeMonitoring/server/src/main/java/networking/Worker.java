@@ -76,11 +76,11 @@ public class Worker implements Observer, Runnable {
                     outputStream.writeObject(new Response("findAllMyLoggedInEmployees", service.findAllMyLoggedInEmployees(manager)));
                 }
 
-                if (request.type.equals("checkInEmployee")) {
+                if (request.type.equals("checkIn")) {
                     List<Object> objects = (List<Object>) request.data;
                     String employeeUsername = (String) objects.get(0);
-                    String checkInTime = (String) objects.get(1);
-                    outputStream.writeObject(new Response("angajatPrezent", service.checkInEmployee(employeeUsername, checkInTime)));
+                    String time = (String) objects.get(1);
+                    outputStream.writeObject(new Response("checkIn", service.checkInEmployee(employeeUsername, time)));
                     outputStream.flush();
                 }
 
